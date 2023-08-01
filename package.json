@@ -2,11 +2,11 @@
   "name": "nodejs_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "calculator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf dist && npx tsc",
-    "start-server": "npm run build && node dist/app.js"
+    "start-server": "npm run build && node dist/calculator.js"
   },
   "keywords": [],
   "author": "",
