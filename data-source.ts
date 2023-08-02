@@ -12,6 +12,7 @@ const dataSource = new DataSource({
   logging: true,
   entities: [Employee],
   namingStrategy: new SnakeNamingStrategy(),
+  synchronize: true //only set during dev phase to make quick features, here we are using for deletedAt column
 });
 
 export default dataSource;
