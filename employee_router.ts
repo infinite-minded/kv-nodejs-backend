@@ -55,7 +55,7 @@ employeeRouter.get("/", async (req, res) => {
   const qb = employeeRepository.createQueryBuilder(); - FIRST CREATE QB
   - SPECIFY REQUIRED CONDITIONS FOR QUERY
   if (nameFilter)
-    { qb.andWhere("name LIKE :somename", { somename: `${nameFilter}` }); } - this can be used with nameFilter
+    { qb.andWhere("name LIKE :somename", { somename: `%${nameFilter}%` }); } - this can be used with nameFilter
   if (emailFilter)
     { qb.andWhere("email LIKE :email", { email: `%${emailFilter}%` }); } - this can be used with const emailFilter = req.query.email;
   const employees = await qb.getMany(); - THEN EXECUTE USING getMany()
