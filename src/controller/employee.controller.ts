@@ -26,7 +26,9 @@ class EmployeeController {
 
   getAllEmployees = async (req: express.Request, res: express.Response) => {
     const nameFilter = req.query.name;
-    const employees = await this.employeeService.fetchAllEmployees(nameFilter as string);
+    const employees = await this.employeeService.fetchAllEmployees(
+      nameFilter as string
+    );
     res.status(200).send(employees);
   };
 
@@ -37,11 +39,11 @@ class EmployeeController {
   };
 
   addEmployee = async (req: express.Request, res: express.Response) => {
-    const employeeName = req.body.name;
-    const employeeEmail = req.body.email;
+    const { name, email, address } = req.body;
     const newEmployee = await this.employeeService.createEmployee(
-      employeeName,
-      employeeEmail
+      name,
+      email,
+      address
     );
     res.status(201).send(newEmployee);
   };
@@ -50,10 +52,12 @@ class EmployeeController {
     const employeeId = Number(req.params.id);
     const employeeName = req.body.name;
     const employeeEmail = req.body.email;
+    const employeeAddress = req.body.address;
     const modifiedEmployee = await this.employeeService.updateEmployee(
       employeeId,
       employeeName,
-      employeeEmail
+      employeeEmail,
+      employeeAddress
     );
     res.status(200).send(modifiedEmployee);
   };

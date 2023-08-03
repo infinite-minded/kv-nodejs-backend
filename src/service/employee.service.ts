@@ -1,3 +1,4 @@
+import { Address } from "../entity/address.entity";
 import Employee from "../entity/employee.entity";
 import EmployeeRepository from "../repository/employee.repository";
 
@@ -20,21 +21,31 @@ class EmployeeService {
     return this.employeeRepository.findEmployeeById(id);
   }
 
-  createEmployee(name: string, email: string): Promise<Employee> {
+  createEmployee(name: string, email: string, address: any): Promise<Employee> {
     const newEmployee = new Employee();
     newEmployee.name = name;
     newEmployee.email = email;
+
+    const newAddress = new Address();
+    newAddress.line1 = address.line1;
+    newAddress.pincode = address.pincode;
+
+    newEmployee.address = newAddress; //OR newAddress.employee = newEmployee; - will this work & what other changes needed?
+
     return this.employeeRepository.addNewEmployee(newEmployee);
   }
 
   async updateEmployee(
     id: number,
     name: string,
-    email: string
+    email: string,
+    address: Address
   ): Promise<Employee | null> {
     const employee = await this.getEmployeeById(id);
     employee.name = name;
     employee.email = email;
+    employee.address.line1 = address.line1;
+    employee.address.pincode = address.pincode;
     return this.employeeRepository.modifyEmployeeById(employee);
   }
 

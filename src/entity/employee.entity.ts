@@ -5,7 +5,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  OneToOne,
 } from "typeorm";
+import { Address } from "./address.entity";
 
 @Entity("employees")
 class Employee {
@@ -33,6 +35,11 @@ class Employee {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToOne(() => Address, (address) => address.employee, {
+    cascade: true,
+  })
+  address: Address;
 }
 
 export default Employee;

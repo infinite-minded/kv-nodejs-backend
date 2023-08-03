@@ -1,6 +1,5 @@
 import { DataSource, Like, Repository } from "typeorm";
 import Employee from "../entity/employee.entity";
-import dataSource from "../db/postgres.db";
 
 class EmployeeRepository {
   private dataSource: DataSource;
@@ -12,12 +11,19 @@ class EmployeeRepository {
       where: {
         name: Like(filter),
       },
+      relations: {
+        address: true,
+      },
     });
   }
 
   findEmployeeById(id: number): Promise<Employee> {
-    return this.employeeRepository.findOneBy({
-      id: id,
+    return this.employeeRepository.findOne({
+      where: { id: id },
+      relations: {
+        address: true,
+        //add other properties here to perform join with other tables
+      },
     });
   }
 
