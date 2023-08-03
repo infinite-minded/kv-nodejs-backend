@@ -25,8 +25,8 @@ class EmployeeRepository {
     return this.employeeRepository.save(newEmployee);
   }
 
-  modifyEmployeeById(modifiedEmployee: Employee): Promise<Employee> {
-    return this.employeeRepository.save(modifiedEmployee);
+  modifyEmployeeById(updatedEmployee: Employee): Promise<Employee> {
+    return this.employeeRepository.save(updatedEmployee);
   }
 
   deleteEmployeeById(employeeToBeRemoved: Employee): Promise<Employee> {
