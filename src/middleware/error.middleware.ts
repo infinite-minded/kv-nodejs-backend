@@ -1,5 +1,6 @@
 import express from "express";
 import { HttpException } from "../exception/http.exception";
+import { ValidateException } from "../exception/validate.exception";
 
 export const errorMiddleware = (
   error: Error,
@@ -9,7 +10,12 @@ export const errorMiddleware = (
 ) => {
   try {
     console.error(error.stack);
-    if (error instanceof HttpException) {
+    if (error instanceof ValidateException) {
+      res.status(error.status).send({
+        message: error.message,
+        errors: error.exceptionList,
+      });
+    } else if (error instanceof HttpException) {
       res.status(error.status).send({ error: error.message });
       return;
     } else {

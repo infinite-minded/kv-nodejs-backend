@@ -4,6 +4,7 @@ import { plainToInstance } from "class-transformer";
 import { CreateEmployeeDto } from "../dto/create-employee.dto";
 import { validate } from "class-validator";
 import { HttpException } from "../exception/http.exception";
+import { ValidateException } from "../exception/validate.exception";
 
 class EmployeeController {
   public router: express.Router;
@@ -28,18 +29,26 @@ class EmployeeController {
     this.router.delete("/:id", this.removeEmployee);
   }
 
-  getAllEmployees = async (req: express.Request, res: express.Response) => {
-    const nameFilter = req.query.name;
-    const employees = await this.employeeService.fetchAllEmployees(
-      nameFilter as string
-    );
-    res.status(200).send(employees);
+  getAllEmployees = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    try {
+      const nameFilter = req.query.name;
+      const employees = await this.employeeService.fetchAllEmployees(
+        nameFilter as string
+      );
+      res.status(200).send(employees);
+    } catch (err) {
+      next(err);
+    }
   };
 
   getEmployee = async (
     req: express.Request,
     res: express.Response,
-    next: NextFunction
+    next: express.NextFunction
   ) => {
     try {
       const employeeId = Number(req.params.id);
@@ -60,8 +69,7 @@ class EmployeeController {
       const createEmployeeDto = plainToInstance(CreateEmployeeDto, req.body);
       const errors = await validate(createEmployeeDto);
       if (errors.length > 0) {
-        console.log(JSON.stringify(errors));
-        throw new HttpException(400, JSON.stringify(errors));
+        throw new ValidateException(400, "Validation Errors", errors);
       }
       const newEmployee = await this.employeeService.createEmployee(
         name,
@@ -74,24 +82,45 @@ class EmployeeController {
     }
   };
 
-  modifyEmployee = async (req: express.Request, res: express.Response) => {
-    const employeeId = Number(req.params.id);
-    const employeeName = req.body.name;
-    const employeeEmail = req.body.email;
-    const employeeAddress = req.body.address;
-    const modifiedEmployee = await this.employeeService.updateEmployee(
-      employeeId,
-      employeeName,
-      employeeEmail,
-      employeeAddress
-    );
-    res.status(200).send(modifiedEmployee);
+  modifyEmployee = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    try {
+      const modifyEmployeeDto = plainToInstance(CreateEmployeeDto, req.body);
+      const errors = await validate(modifyEmployeeDto);
+      if (errors.length > 0) {
+        throw new ValidateException(400, "Validation Errors", errors);
+      }
+      const employeeId = Number(req.params.id);
+      const employeeName = req.body.name;
+      const employeeEmail = req.body.email;
+      const employeeAddress = req.body.address;
+      const modifiedEmployee = await this.employeeService.updateEmployee(
+        employeeId,
+        employeeName,
+        employeeEmail,
+        employeeAddress
+      );
+      res.status(200).send(modifiedEmployee);
+    } catch (err) {
+      next(err);
+    }
   };
 
-  removeEmployee = async (req: express.Request, res: express.Response) => {
-    const employeeId = Number(req.params.id);
-    await this.employeeService.deleteEmployee(employeeId);
-    res.status(204).send("Employee deleted");
+  removeEmployee = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    try {
+      const employeeId = Number(req.params.id);
+      await this.employeeService.deleteEmployee(employeeId);
+      res.status(204).send("Employee deleted");
+    } catch (err) {
+      next(err);
+    }
   };
 }
 
