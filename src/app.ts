@@ -1,14 +1,14 @@
 import "reflect-metadata";
 import express from "express";
-import loggerMiddleware from "./loggerMiddleware";
-import employeeRouter from "./employee_router";
-import dataSource from "./data-source";
+import bodyparser from "body-parser";
+import loggerMiddleware from "./middleware/logger.middleware";
+import dataSource from "./db/postgres.db";
+import employeeRoute from "./route/employee.route";
 
 const server = express();
-
-server.use(express.json());
+server.use(bodyparser.json());
 server.use(loggerMiddleware);
-server.use("/employees", employeeRouter);
+server.use("/employees", employeeRoute);
 
 server.get("/", (req, res) => {
   console.log(req.url);

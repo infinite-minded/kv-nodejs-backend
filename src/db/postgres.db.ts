@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import Employee from "./employee";
+import Employee from "../entity/employee.entity";
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 
 const dataSource = new DataSource({
