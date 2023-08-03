@@ -1,8 +1,7 @@
 import express from "express";
 import Employee from "./employee";
 //import { Client } from "pg";
-import { DataSource, Like } from "typeorm";
-import { SnakeNamingStrategy } from "typeorm-naming-strategies";
+import { Like } from "typeorm";
 import dataSource from "./data-source";
 
 const employeeRouter = express.Router();

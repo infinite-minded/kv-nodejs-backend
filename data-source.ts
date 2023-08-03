@@ -9,10 +9,11 @@ const dataSource = new DataSource({
   username: "postgres",
   password: "postgres",
   database: "training",
-  logging: true,
+  logging: true, //to see underlying queries in console
   entities: [Employee],
   namingStrategy: new SnakeNamingStrategy(),
-  synchronize: true //only set during dev phase to make quick features, here we are using for deletedAt column
+  synchronize: true //destructive - understand why? - only set during dev phase to make quick features, here we are using for deletedAt column,
+  //never use in production
 });
 
 export default dataSource;
