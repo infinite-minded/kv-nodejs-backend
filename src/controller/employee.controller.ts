@@ -1,5 +1,9 @@
-import express from "express";
+import express, { NextFunction } from "express";
 import EmployeeService from "../service/employee.service";
+import { plainToInstance } from "class-transformer";
+import { CreateEmployeeDto } from "../dto/create-employee.dto";
+import { validate } from "class-validator";
+import { HttpException } from "../exception/http.exception";
 
 class EmployeeController {
   public router: express.Router;
@@ -32,20 +36,42 @@ class EmployeeController {
     res.status(200).send(employees);
   };
 
-  getEmployee = async (req: express.Request, res: express.Response) => {
-    const employeeId = Number(req.params.id);
-    const employees = await this.employeeService.getEmployeeById(employeeId);
-    res.status(200).send(employees);
+  getEmployee = async (
+    req: express.Request,
+    res: express.Response,
+    next: NextFunction
+  ) => {
+    try {
+      const employeeId = Number(req.params.id);
+      const employees = await this.employeeService.getEmployeeById(employeeId);
+      res.status(200).send(employees);
+    } catch (error) {
+      next(error);
+    }
   };
 
-  addEmployee = async (req: express.Request, res: express.Response) => {
-    const { name, email, address } = req.body;
-    const newEmployee = await this.employeeService.createEmployee(
-      name,
-      email,
-      address
-    );
-    res.status(201).send(newEmployee);
+  addEmployee = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    try {
+      const { name, email, address } = req.body;
+      const createEmployeeDto = plainToInstance(CreateEmployeeDto, req.body);
+      const errors = await validate(createEmployeeDto);
+      if (errors.length > 0) {
+        console.log(JSON.stringify(errors));
+        throw new HttpException(400, JSON.stringify(errors));
+      }
+      const newEmployee = await this.employeeService.createEmployee(
+        name,
+        email,
+        address
+      );
+      res.status(201).send(newEmployee);
+    } catch (err) {
+      next(err);
+    }
   };
 
   modifyEmployee = async (req: express.Request, res: express.Response) => {

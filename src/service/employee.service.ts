@@ -1,5 +1,6 @@
 import { Address } from "../entity/address.entity";
 import Employee from "../entity/employee.entity";
+import { HttpException } from "../exception/http.exception";
 import EmployeeRepository from "../repository/employee.repository";
 
 class EmployeeService {
@@ -16,9 +17,13 @@ class EmployeeService {
     return this.employeeRepository.findAllEmployees(filter);
   }
 
-  getEmployeeById(id: number): Promise<Employee | null> {
+  async getEmployeeById(id: number): Promise<Employee | null> {
     //TO DO - business logic
-    return this.employeeRepository.findEmployeeById(id);
+    const employee = await this.employeeRepository.findEmployeeById(id);
+    if (!employee) {
+      throw new HttpException(404, `Employee with ID ${id} not found!`);
+    }
+    return employee;
   }
 
   createEmployee(name: string, email: string, address: any): Promise<Employee> {
