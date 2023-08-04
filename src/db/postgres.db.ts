@@ -3,11 +3,11 @@ import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 
 const dataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
-  port: 8765,
-  username: "postgres",
-  password: "postgres",
-  database: "training",
+  host: process.env.POSTGRES_HOST,
+  port: Number(process.env.POSTGRES_PORT),
+  username: process.env.POSTGRES_USERNAME,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DATABASE,
   logging: true, //to see underlying queries in console
   entities: ["dist/entity/*.js"],
   namingStrategy: new SnakeNamingStrategy(), //since we used updated_at, created_at in db table - this naming scheme is snake

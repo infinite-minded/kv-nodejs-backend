@@ -13,7 +13,7 @@ export const authenticate = async (
     const token = getTokenFromRequestHeader(req);
     const payload: jwtPayload = jsonwebtoken.verify(
       token,
-      "ABCDE"
+      process.env.JWT_SECRET_KEY
     ) as jwtPayload;
     req.name = payload.name;
     req.email = payload.email;

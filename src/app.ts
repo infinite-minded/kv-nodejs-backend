@@ -1,3 +1,5 @@
+import * as dotenv from "dotenv";
+dotenv.config({ path: __dirname + "/.env" });
 import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 import bodyparser from "body-parser";

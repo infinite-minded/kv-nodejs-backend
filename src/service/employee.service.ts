@@ -103,7 +103,9 @@ class EmployeeService {
       role: employee.role,
     };
 
-    const token = jsonwebtoken.sign(payload, "ABCDE", { expiresIn: "6h" }); //60 enn mathram koduthal it is 60ms, also algo can be set in 3rd arg of sign()
+    const token = jsonwebtoken.sign(payload, process.env.JWT_SECRET_KEY, {
+      expiresIn: "6h",
+    }); //60 enn mathram koduthal it is 60ms, also algo can be set in 3rd arg of sign()
     return { token: token };
   };
 }
