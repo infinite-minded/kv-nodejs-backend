@@ -2,6 +2,8 @@ import { Address } from "../entity/address.entity";
 import Employee from "../entity/employee.entity";
 import { HttpException } from "../exception/http.exception";
 import EmployeeRepository from "../repository/employee.repository";
+import bcrypt from "bcrypt";
+import jsonwebtoken from "jsonwebtoken";
 
 class EmployeeService {
   constructor(private employeeRepository: EmployeeRepository) {}
@@ -30,7 +32,12 @@ class EmployeeService {
     return employee;
   }
 
-  createEmployee(name: string, email: string, address: any): Promise<Employee> {
+  async createEmployee(
+    name: string,
+    email: string,
+    address: Address,
+    password: string
+  ): Promise<Employee> {
     const newEmployee = new Employee();
     newEmployee.name = name;
     newEmployee.email = email;
@@ -41,6 +48,8 @@ class EmployeeService {
 
     newEmployee.address = newAddress; //OR newAddress.employee = newEmployee; - will this work & what other changes needed?
 
+    newEmployee.password = await bcrypt.hash(password, 10);
+
     return this.employeeRepository.addNewEmployee(newEmployee);
   }
 
@@ -48,7 +57,8 @@ class EmployeeService {
     id: number,
     name: string,
     email: string,
-    address: Address
+    address: Address,
+    password: string
   ): Promise<Employee | null> {
     try {
       const employee = await this.getEmployeeById(id); //any invalid ID request exception will be thrown in getEmployeeById() itself
@@ -56,6 +66,7 @@ class EmployeeService {
       employee.email = email;
       employee.address.line1 = address.line1;
       employee.address.pincode = address.pincode;
+      employee.password = await bcrypt.hash(password, 10);
       return this.employeeRepository.modifyEmployeeById(employee);
     } catch (error) {
       throw error;
@@ -70,6 +81,26 @@ class EmployeeService {
       throw error;
     }
   }
+
+  loginEmployee = async (email: string, password: string) => {
+    const employee = await this.employeeRepository.findByEmail(email);
+    if (!employee) {
+      throw new HttpException(401, "Incorrect email or password");
+    }
+
+    const passwordCorrect = await bcrypt.compare(password, employee.password);
+    if (!passwordCorrect) {
+      throw new HttpException(401, "Incorrect email or password");
+    }
+
+    const payload = {
+      name: employee.name,
+      email: employee.email,
+    };
+
+    const token = jsonwebtoken.sign(payload, "ABCDE", { expiresIn: "6h" }); //60 enn mathram koduthal it is 60ms, also algo can be set in 3rd arg of sign()
+    return { token: token };
+  };
 }
 
 export default EmployeeService;

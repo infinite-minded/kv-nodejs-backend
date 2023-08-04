@@ -27,6 +27,16 @@ class EmployeeRepository {
     });
   }
 
+  findByEmail(email: string): Promise<Employee> {
+    return this.employeeRepository.findOne({
+      where: { email: email },
+      relations: {
+        address: true,
+        //add other properties here to perform join with other tables
+      },
+    });
+  }
+
   addNewEmployee(newEmployee: Employee): Promise<Employee> {
     return this.employeeRepository.save(newEmployee);
   }

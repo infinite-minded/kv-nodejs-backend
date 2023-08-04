@@ -25,4 +25,8 @@ export class CreateEmployeeDto {
   @ValidateNested({ each: true }) //to validate inner keys of address object
   @Type(() => CreateAddressDto)
   address: Address;
+
+  @IsNotEmpty()
+  @IsString()
+  password: string;
 }
