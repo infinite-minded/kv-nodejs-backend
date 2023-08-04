@@ -5,6 +5,7 @@ import { CreateEmployeeDto } from "../dto/create-employee.dto";
 import { validate } from "class-validator";
 import { ValidateException } from "../exception/validate.exception";
 import { authenticate } from "../middleware/authenticate.middleware";
+import { authorize } from "../middleware/authorize.middleware";
 
 class EmployeeController {
   public router: express.Router;
@@ -18,16 +19,16 @@ class EmployeeController {
     //to be member variables
 
     //API to handle fetching of specific employee by ID
-    this.router.get("/:id", this.getEmployee);
+    this.router.get("/:id", authenticate, this.getEmployee);
 
     //API to handle creation of a new employee
-    this.router.post("/", this.addEmployee);
+    this.router.post("/", authenticate, authorize, this.addEmployee);
 
     //API to handle modification of a specific employee by ID
-    this.router.put("/:id", this.modifyEmployee);
+    this.router.put("/:id", authenticate, authorize, this.modifyEmployee);
 
     //API to handle deletion of a specific employee by ID
-    this.router.delete("/:id", this.removeEmployee);
+    this.router.delete("/:id", authenticate, authorize, this.removeEmployee);
 
     //API to handle login auth
     this.router.post("/login", this.loginEmployee);
@@ -79,7 +80,8 @@ class EmployeeController {
         createEmployeeDto.name, //pass validated DTO attribs here instead of name, email, etc
         createEmployeeDto.email,
         createEmployeeDto.address,
-        createEmployeeDto.password
+        createEmployeeDto.password,
+        createEmployeeDto.role
       );
       res.status(201).send(newEmployee);
     } catch (err) {

@@ -4,6 +4,8 @@ import { HttpException } from "../exception/http.exception";
 import EmployeeRepository from "../repository/employee.repository";
 import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
+import { Role } from "../utils/role.enum";
+import { jwtPayload } from "../utils/jwtPayload.type";
 
 class EmployeeService {
   constructor(private employeeRepository: EmployeeRepository) {}
@@ -36,7 +38,8 @@ class EmployeeService {
     name: string,
     email: string,
     address: Address,
-    password: string
+    password: string,
+    role: Role
   ): Promise<Employee> {
     const newEmployee = new Employee();
     newEmployee.name = name;
@@ -49,6 +52,7 @@ class EmployeeService {
     newEmployee.address = newAddress; //OR newAddress.employee = newEmployee; - will this work & what other changes needed?
 
     newEmployee.password = await bcrypt.hash(password, 10);
+    newEmployee.role = role;
 
     return this.employeeRepository.addNewEmployee(newEmployee);
   }
@@ -93,9 +97,10 @@ class EmployeeService {
       throw new HttpException(401, "Incorrect email or password");
     }
 
-    const payload = {
+    const payload: jwtPayload = {
       name: employee.name,
       email: employee.email,
+      role: employee.role,
     };
 
     const token = jsonwebtoken.sign(payload, "ABCDE", { expiresIn: "6h" }); //60 enn mathram koduthal it is 60ms, also algo can be set in 3rd arg of sign()
