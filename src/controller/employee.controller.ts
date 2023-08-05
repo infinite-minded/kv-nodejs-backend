@@ -8,6 +8,7 @@ import { authenticate } from "../middleware/authenticate.middleware";
 import { authorize } from "../middleware/authorize.middleware";
 import { FormatResponse } from "../utils/formatResponse";
 import { RequestWithUser } from "../utils/requestWithUser";
+import { Role } from "../utils/role.enum";
 
 class EmployeeController {
   public router: express.Router;
@@ -24,13 +25,28 @@ class EmployeeController {
     this.router.get("/:id", authenticate, this.getEmployee);
 
     //API to handle creation of a new employee
-    this.router.post("/", authenticate, authorize, this.addEmployee);
+    this.router.post(
+      "/",
+      authenticate,
+      authorize([Role.HR, Role.ADMIN]),
+      this.addEmployee
+    );
 
     //API to handle modification of a specific employee by ID
-    this.router.put("/:id", authenticate, authorize, this.modifyEmployee);
+    this.router.put(
+      "/:id",
+      authenticate,
+      authorize([Role.HR, Role.ADMIN]),
+      this.modifyEmployee
+    );
 
     //API to handle deletion of a specific employee by ID
-    this.router.delete("/:id", authenticate, authorize, this.removeEmployee);
+    this.router.delete(
+      "/:id",
+      authenticate,
+      authorize([Role.HR, Role.ADMIN]),
+      this.removeEmployee
+    );
 
     //API to handle login auth
     this.router.post("/login", this.loginEmployee);
