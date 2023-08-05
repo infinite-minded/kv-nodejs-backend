@@ -7,16 +7,18 @@ import loggerMiddleware from "./middleware/logger.middleware";
 import dataSource from "./db/postgres.db";
 import employeeRoute from "./route/employee.route";
 import { errorMiddleware } from "./middleware/error.middleware";
+import { RequestWithUser } from "./utils/requestWithUser";
 
 const server = express();
 server.use(bodyparser.json());
 server.use(loggerMiddleware);
+server.use(
+  (request: RequestWithUser, response: Response, next: NextFunction) => {
+    request.initTime = Date.now();
+    next();
+  }
+);
 server.use("/employees", employeeRoute);
-
-server.get("/", (req, res) => {
-  console.log(req.url);
-  res.status(200).send("Hello there!");
-});
 
 //ERROR MIDDLEWARE - CUSTOM ONE (Express has a default error handler)
 server.use(errorMiddleware);

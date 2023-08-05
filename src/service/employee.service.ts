@@ -34,6 +34,14 @@ class EmployeeService {
     return employee;
   }
 
+  async getEmployeeByEmail(email: string): Promise<Employee | null> {
+    const employee = await this.employeeRepository.findByEmail(email);
+    if (!employee) {
+      throw new HttpException(404, `Employee with email ${email} not found!`);
+    }
+    return employee;
+  }
+
   async createEmployee(
     name: string,
     email: string,
@@ -104,9 +112,9 @@ class EmployeeService {
     };
 
     const token = jsonwebtoken.sign(payload, process.env.JWT_SECRET_KEY, {
-      expiresIn: "6h",
+      expiresIn: process.env.JWT_EXPIRY_TIME,
     }); //60 enn mathram koduthal it is 60ms, also algo can be set in 3rd arg of sign()
-    return { token: token };
+    return token;
   };
 }
 

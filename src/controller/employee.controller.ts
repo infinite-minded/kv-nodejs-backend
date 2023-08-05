@@ -6,6 +6,8 @@ import { validate } from "class-validator";
 import { ValidateException } from "../exception/validate.exception";
 import { authenticate } from "../middleware/authenticate.middleware";
 import { authorize } from "../middleware/authorize.middleware";
+import { FormatResponse } from "../utils/formatResponse";
+import { RequestWithUser } from "../utils/requestWithUser";
 
 class EmployeeController {
   public router: express.Router;
@@ -35,7 +37,7 @@ class EmployeeController {
   }
 
   public getAllEmployees = async (
-    req: express.Request,
+    req: RequestWithUser,
     res: express.Response,
     next: express.NextFunction
   ) => {
@@ -44,28 +46,36 @@ class EmployeeController {
       const employees = await this.employeeService.fetchAllEmployees(
         nameFilter as string
       );
-      res.status(200).send(employees);
+      res
+        .status(200)
+        .send(
+          FormatResponse.format(employees, Date.now() - req.initTime, "OK")
+        );
     } catch (err) {
       next(err);
     }
   };
 
   public getEmployee = async (
-    req: express.Request,
+    req: RequestWithUser,
     res: express.Response,
     next: express.NextFunction
   ) => {
     try {
       const employeeId = Number(req.params.id);
       const employees = await this.employeeService.getEmployeeById(employeeId);
-      res.status(200).send(employees);
+      res
+        .status(200)
+        .send(
+          FormatResponse.format(employees, Date.now() - req.initTime, "OK")
+        );
     } catch (error) {
       next(error);
     }
   };
 
   public addEmployee = async (
-    req: express.Request,
+    req: RequestWithUser,
     res: express.Response,
     next: express.NextFunction
   ) => {
@@ -83,14 +93,18 @@ class EmployeeController {
         createEmployeeDto.password,
         createEmployeeDto.role
       );
-      res.status(201).send(newEmployee);
+      res
+        .status(201)
+        .send(
+          FormatResponse.format(newEmployee, Date.now() - req.initTime, "OK")
+        );
     } catch (err) {
       next(err);
     }
   };
 
   public modifyEmployee = async (
-    req: express.Request,
+    req: RequestWithUser,
     res: express.Response,
     next: express.NextFunction
   ) => {
@@ -113,35 +127,49 @@ class EmployeeController {
         modifyEmployeeDto.address,
         modifyEmployeeDto.password
       );
-      res.status(200).send(modifiedEmployee);
+      res
+        .status(200)
+        .send(
+          FormatResponse.format(
+            modifiedEmployee,
+            Date.now() - req.initTime,
+            "OK"
+          )
+        );
     } catch (err) {
       next(err);
     }
   };
 
   public removeEmployee = async (
-    req: express.Request,
+    req: RequestWithUser,
     res: express.Response,
     next: express.NextFunction
   ) => {
     try {
       const employeeId = Number(req.params.id);
       await this.employeeService.deleteEmployee(employeeId);
-      res.status(204).send("Employee deleted");
+      res.status(204).send();
     } catch (err) {
       next(err);
     }
   };
 
   public loginEmployee = async (
-    req: express.Request,
+    req: RequestWithUser,
     res: express.Response,
     next: express.NextFunction
   ) => {
     const { email, password } = req.body;
     try {
       const token = await this.employeeService.loginEmployee(email, password);
-      res.status(200).send({ data: token }); //this kind of structure is expected while using send()
+      const employeeDetails = await this.employeeService.getEmployeeByEmail(
+        email
+      );
+      const data = { token: token, employeeDetails: employeeDetails };
+      res
+        .status(201)
+        .send(FormatResponse.format(data, Date.now() - req.initTime, "OK")); //this kind of structure is expected while using send()
     } catch (err) {
       next(err);
     }
