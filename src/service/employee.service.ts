@@ -47,7 +47,8 @@ class EmployeeService {
     email: string,
     address: Address,
     password: string,
-    role: Role
+    role: Role,
+    departmentId: number
   ): Promise<Employee> {
     const newEmployee = new Employee();
     newEmployee.name = name;
@@ -59,8 +60,9 @@ class EmployeeService {
 
     newEmployee.address = newAddress; //OR newAddress.employee = newEmployee; - will this work & what other changes needed?
 
-    newEmployee.password = await bcrypt.hash(password, 10);
+    newEmployee.password = await bcrypt.hash(password, 9);
     newEmployee.role = role;
+    newEmployee.departmentId = departmentId;
 
     return this.employeeRepository.addNewEmployee(newEmployee);
   }
@@ -70,7 +72,9 @@ class EmployeeService {
     name: string,
     email: string,
     address: Address,
-    password: string
+    password: string,
+    role: Role,
+    departmentId: number
   ): Promise<Employee | null> {
     try {
       const employee = await this.getEmployeeById(id); //any invalid ID request exception will be thrown in getEmployeeById() itself
@@ -78,7 +82,9 @@ class EmployeeService {
       employee.email = email;
       employee.address.line1 = address.line1;
       employee.address.pincode = address.pincode;
-      employee.password = await bcrypt.hash(password, 10);
+      employee.password = await bcrypt.hash(password, 9);
+      employee.role = role;
+      employee.departmentId = departmentId;
       return this.employeeRepository.modifyEmployeeById(employee);
     } catch (error) {
       throw error;

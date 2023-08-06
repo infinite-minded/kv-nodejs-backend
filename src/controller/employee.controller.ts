@@ -9,6 +9,7 @@ import { authorize } from "../middleware/authorize.middleware";
 import { FormatResponse } from "../utils/formatResponse";
 import { RequestWithUser } from "../utils/requestWithUser";
 import { Role } from "../utils/role.enum";
+import { UpdateEmployeeDto } from "../dto/update-employee.dto";
 
 class EmployeeController {
   public router: express.Router;
@@ -97,6 +98,7 @@ class EmployeeController {
   ) => {
     try {
       //const { name, email, address } = req.body;
+      req.body.departmentId = Number(req.body.departmentId);
       const createEmployeeDto = plainToInstance(CreateEmployeeDto, req.body);
       const errors = await validate(createEmployeeDto);
       if (errors.length > 0) {
@@ -107,7 +109,8 @@ class EmployeeController {
         createEmployeeDto.email,
         createEmployeeDto.address,
         createEmployeeDto.password,
-        createEmployeeDto.role
+        createEmployeeDto.role,
+        createEmployeeDto.departmentId
       );
       res
         .status(201)
@@ -125,23 +128,26 @@ class EmployeeController {
     next: express.NextFunction
   ) => {
     try {
-      const modifyEmployeeDto = plainToInstance(CreateEmployeeDto, req.body);
+      const modifyEmployeeDto = plainToInstance(UpdateEmployeeDto, req.body);
+      modifyEmployeeDto.id = Number(req.params.id);
       const errors = await validate(modifyEmployeeDto);
       if (errors.length > 0) {
         throw new ValidateException(400, "Validation Errors", errors);
       }
-      const employeeId = Number(req.params.id);
+      //const employeeId = Number(req.params.id);
       /*
       const employeeName = req.body.name;
       const employeeEmail = req.body.email;
       const employeeAddress = req.body.address;
       */
       const modifiedEmployee = await this.employeeService.updateEmployee(
-        employeeId,
+        modifyEmployeeDto.id,
         modifyEmployeeDto.name,
         modifyEmployeeDto.email,
         modifyEmployeeDto.address,
-        modifyEmployeeDto.password
+        modifyEmployeeDto.password,
+        modifyEmployeeDto.role,
+        modifyEmployeeDto.departmentId
       );
       res
         .status(200)

@@ -12,7 +12,10 @@ import { Address } from "../entity/address.entity";
 import { CreateAddressDto } from "./create-address.dto";
 import { Role } from "../utils/role.enum";
 
-export class CreateEmployeeDto {
+export class UpdateEmployeeDto {
+  @IsNumber()
+  id: number;
+
   @IsNotEmpty()
   @IsString()
   name: string;
