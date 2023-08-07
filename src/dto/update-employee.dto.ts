@@ -11,6 +11,8 @@ import { Type } from "class-transformer";
 import { Address } from "../entity/address.entity";
 import { CreateAddressDto } from "./create-address.dto";
 import { Role } from "../utils/role.enum";
+import { CreateDepartmentDto } from "./create-department.dto";
+import { Department } from "../entity/department-entity";
 
 export class UpdateEmployeeDto {
   @IsNumber()
@@ -39,6 +41,8 @@ export class UpdateEmployeeDto {
   role: Role;
 
   @IsNotEmpty()
-  @IsNumber()
-  departmentId: number;
+  @IsObject()
+  @ValidateNested({ each: true }) //to validate inner keys of address object
+  @Type(() => CreateDepartmentDto)
+  department: Department;
 }

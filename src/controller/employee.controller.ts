@@ -98,7 +98,7 @@ class EmployeeController {
   ) => {
     try {
       //const { name, email, address } = req.body;
-      req.body.departmentId = Number(req.body.departmentId);
+      //req.body.departmentId = Number(req.body.departmentId);
       const createEmployeeDto = plainToInstance(CreateEmployeeDto, req.body);
       const errors = await validate(createEmployeeDto);
       if (errors.length > 0) {
@@ -110,7 +110,7 @@ class EmployeeController {
         createEmployeeDto.address,
         createEmployeeDto.password,
         createEmployeeDto.role,
-        createEmployeeDto.departmentId
+        createEmployeeDto.department
       );
       res
         .status(201)
@@ -147,7 +147,7 @@ class EmployeeController {
         modifyEmployeeDto.address,
         modifyEmployeeDto.password,
         modifyEmployeeDto.role,
-        modifyEmployeeDto.departmentId
+        modifyEmployeeDto.department
       );
       res
         .status(200)

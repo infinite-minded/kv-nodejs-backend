@@ -27,11 +27,9 @@ class Employee extends AbstractEntity {
   })
   address: Address;
 
-  @ManyToOne(() => Department, (department) => department.id, {
-    nullable: true,
-  })
+  @ManyToOne(() => Department, (department) => department.id)
   @JoinColumn()
-  departmentId: number;
+  department: Department;
 }
 
 export default Employee;

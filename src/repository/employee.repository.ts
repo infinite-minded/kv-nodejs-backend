@@ -13,6 +13,7 @@ class EmployeeRepository {
       },
       relations: {
         address: true,
+        department: true
       },
     });
   }
@@ -22,6 +23,7 @@ class EmployeeRepository {
       where: { id: id },
       relations: {
         address: true,
+        department: true
         //add other properties here to perform join with other tables
       },
     });
@@ -32,6 +34,7 @@ class EmployeeRepository {
       where: { email: email },
       relations: {
         address: true,
+        department: true
         //add other properties here to perform join with other tables
       },
     });

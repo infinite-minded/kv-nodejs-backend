@@ -6,9 +6,11 @@ import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
 import { Role } from "../utils/role.enum";
 import { jwtPayload } from "../utils/jwtPayload.type";
+import { Department } from "../entity/department-entity";
+import { DepartmentService } from "../service/department.service";
 
 class EmployeeService {
-  constructor(private employeeRepository: EmployeeRepository) {}
+  constructor(private employeeRepository: EmployeeRepository, private departmentService: DepartmentService) {}
 
   async fetchAllEmployees(nameFilter: string): Promise<Employee[]> {
     //add additional business logic here if needed
@@ -48,7 +50,7 @@ class EmployeeService {
     address: Address,
     password: string,
     role: Role,
-    departmentId: number
+    department: Department
   ): Promise<Employee> {
     const newEmployee = new Employee();
     newEmployee.name = name;
@@ -62,7 +64,10 @@ class EmployeeService {
 
     newEmployee.password = await bcrypt.hash(password, 9);
     newEmployee.role = role;
-    newEmployee.departmentId = departmentId;
+
+    const assignedDepartment = await this.departmentService.getDepartmentByName(department.name)
+
+    newEmployee.department = assignedDepartment;
 
     return this.employeeRepository.addNewEmployee(newEmployee);
   }
@@ -74,7 +79,7 @@ class EmployeeService {
     address: Address,
     password: string,
     role: Role,
-    departmentId: number
+    department: Department
   ): Promise<Employee | null> {
     try {
       const employee = await this.getEmployeeById(id); //any invalid ID request exception will be thrown in getEmployeeById() itself
@@ -84,7 +89,8 @@ class EmployeeService {
       employee.address.pincode = address.pincode;
       employee.password = await bcrypt.hash(password, 9);
       employee.role = role;
-      employee.departmentId = departmentId;
+      const newDepartment = await this.departmentService.getDepartmentByName(department.name)
+      employee.department = newDepartment;
       return this.employeeRepository.modifyEmployeeById(employee);
     } catch (error) {
       throw error;

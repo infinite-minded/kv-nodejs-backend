@@ -21,6 +21,14 @@ export class DepartmentService {
     return department;
   }
 
+  async getDepartmentByName(name: string): Promise<Department | null> {
+    const department = await this.departmentRepository.findDepartmentByName(name);
+    if (!department) {
+      throw new HttpException(404, `Department with name ${name} not found!`);
+    }
+    return department;
+  }
+
   async createDepartment(name: string): Promise<Department> {
     const newDepartment = new Department();
     newDepartment.name = name;

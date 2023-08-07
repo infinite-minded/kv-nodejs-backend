@@ -5,12 +5,18 @@ export class DepartmentRepository {
   constructor(private departmentRepository: Repository<Department>) {}
 
   findAllDepartments(): Promise<Department[]> {
-    return this.departmentRepository.find({});
+    return this.departmentRepository.find();
   }
 
   findDepartmentById(id: number): Promise<Department | null> {
     return this.departmentRepository.findOne({
       where: { id: id },
+    });
+  }
+
+  findDepartmentByName(name: string): Promise<Department | null> {
+    return this.departmentRepository.findOne({
+      where: { name: name },
     });
   }
 
