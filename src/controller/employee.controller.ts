@@ -10,6 +10,7 @@ import { FormatResponse } from "../utils/formatResponse";
 import { RequestWithUser } from "../utils/requestWithUser";
 import { Role } from "../utils/role.enum";
 import { UpdateEmployeeDto } from "../dto/update-employee.dto";
+import { logger } from "../middleware/winston.middleware";
 
 class EmployeeController {
   public router: express.Router;
@@ -68,6 +69,7 @@ class EmployeeController {
         .send(
           FormatResponse.format(employees, Date.now() - req.initTime, "OK")
         );
+      logger.log("info", "Fetched all employees");
     } catch (err) {
       next(err);
     }
@@ -86,6 +88,7 @@ class EmployeeController {
         .send(
           FormatResponse.format(employees, Date.now() - req.initTime, "OK")
         );
+      logger.log("info", `Employee with ID ${req.params.id} fetched`);
     } catch (error) {
       next(error);
     }
@@ -117,6 +120,7 @@ class EmployeeController {
         .send(
           FormatResponse.format(newEmployee, Date.now() - req.initTime, "OK")
         );
+      logger.log("info", "New employee created");
     } catch (err) {
       next(err);
     }
@@ -158,6 +162,7 @@ class EmployeeController {
             "OK"
           )
         );
+      logger.log("info", `Employee with ID ${req.params.id} updated`);
     } catch (err) {
       next(err);
     }
@@ -172,6 +177,7 @@ class EmployeeController {
       const employeeId = Number(req.params.id);
       await this.employeeService.deleteEmployee(employeeId);
       res.status(204).send();
+      logger.log("info", `Employee with ID ${req.params.id} removed`);
     } catch (err) {
       next(err);
     }
@@ -192,6 +198,7 @@ class EmployeeController {
       res
         .status(201)
         .send(FormatResponse.format(data, Date.now() - req.initTime, "OK")); //this kind of structure is expected while using send()
+      logger.log("info", `Employee with email ${email} logged in`);
     } catch (err) {
       next(err);
     }

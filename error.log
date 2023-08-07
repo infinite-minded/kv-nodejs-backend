@@ -1,0 +1,6 @@
+{
+  level: 'error',
+  message: 'Employee with ID 3 not found!',
+  service: 'user-service',
+  timestamp: '2023-08-07T06:34:56.028Z'
+}

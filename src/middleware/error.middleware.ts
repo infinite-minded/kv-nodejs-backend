@@ -3,6 +3,7 @@ import { HttpException } from "../exception/http.exception";
 import { ValidateException } from "../exception/validate.exception";
 import { FormatResponse } from "../utils/formatResponse";
 import { RequestWithUser } from "../utils/requestWithUser";
+import { logger } from "./winston.middleware";
 
 export const errorMiddleware = (
   error: Error,
@@ -16,18 +17,16 @@ export const errorMiddleware = (
       res
         .status(error.status)
         .send(
-          FormatResponse.format(
-            error,
-            Date.now() - req.initTime,
-            error.message
-          )
+          FormatResponse.format(error, Date.now() - req.initTime, error.message)
         );
+      logger.log("error", error.message, error.exceptionList);
     } else if (error instanceof HttpException) {
       res
         .status(error.status)
         .send(
           FormatResponse.format(error, Date.now() - req.initTime, error.message)
         );
+      logger.log("error", error.message);
       return;
     } else {
       res
@@ -35,6 +34,7 @@ export const errorMiddleware = (
         .send(
           FormatResponse.format(null, Date.now() - req.initTime, error.message)
         );
+      logger.log("error", error.message);
     }
   } catch (err) {
     //catch block is used to handle other errors that we may not be aware of

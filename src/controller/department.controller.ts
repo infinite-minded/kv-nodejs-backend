@@ -10,6 +10,7 @@ import { RequestWithUser } from "../utils/requestWithUser";
 import { FormatResponse } from "../utils/formatResponse";
 import { Role } from "../utils/role.enum";
 import { UpdateDepartmentDto } from "../dto/update-department.dto";
+import { logger } from "../middleware/winston.middleware";
 
 class DepartmentController {
   public router: express.Router;
@@ -50,6 +51,7 @@ class DepartmentController {
         .send(
           FormatResponse.format(departments, Date.now() - req.initTime, "OK")
         );
+      logger.log("info", "Fetched all departments");
     } catch (error) {
       next(error);
     }
@@ -69,6 +71,7 @@ class DepartmentController {
         .send(
           FormatResponse.format(departments, Date.now() - req.initTime, "OK")
         );
+      logger.log("info", `Department with ID ${req.params.id} fetched`);
     } catch (error) {
       next(error);
     }
@@ -96,6 +99,7 @@ class DepartmentController {
         .send(
           FormatResponse.format(newDepartment, Date.now() - req.initTime, "OK")
         );
+      logger.log("info", "New department created");
     } catch (error) {
       next(error);
     }
@@ -130,6 +134,7 @@ class DepartmentController {
             "OK"
           )
         );
+      logger.log("info", `Department with ID ${req.params.id} updated`);
     } catch (error) {
       next(error);
     }
@@ -145,6 +150,7 @@ class DepartmentController {
         Number(req.params.id)
       );
       res.status(204).send();
+      logger.log("info", `Department with ID ${req.params.id} removed`);
     } catch (error) {
       next(error);
     }
