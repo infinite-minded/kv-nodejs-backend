@@ -9,13 +9,8 @@ import { Department } from "../../entity/department-entity";
 import { CreateAddressDto } from "../../dto/create-address.dto";
 import { CreateEmployeeDto } from "../../dto/create-employee.dto";
 import { Role } from "../../utils/role.enum";
-import { Address } from "../../entity/address.entity";
 import { UpdateEmployeeDto } from "../../dto/update-employee.dto";
 import { CreateDepartmentDto } from "../../dto/create-department.dto";
-import { jwtPayload } from "../../utils/jwtPayload.type";
-import bcrypt from "bcrypt";
-import jsobwebtoken, { JsonWebTokenError } from "jsonwebtoken";
-import { json } from "express";
 
 describe("Employee Service Tests", () => {
   let employeeService: EmployeeService;
@@ -387,7 +382,7 @@ describe("Employee Service Tests", () => {
     });
   });
 
-  describe("Test for getEmployeeById", () => {
+  describe("Test for getEmployeeByEmail", () => {
     test("Test for invalid employee email", async () => {
       const mockFunction = jest.fn();
       when(mockFunction).calledWith("test@gmail.com").mockResolvedValue(null); //ResolvedValue is used with async functions
