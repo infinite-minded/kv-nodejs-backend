@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "jest --verbose --setupFiles dotenv/config",
-    "test-coverage": "jest --coverage",
+    "test-coverage": "jest --coverage --setupFiles dotenv/config",
     "build": "rm -rf dist && npx tsc && cp .env ./dist/.env",
     "start-server": "npm run build && node dist/app.js",
     "migration:generate": "npm run build && npx typeorm migration:generate -d dist/db/postgres.db.js",
@@ -40,6 +40,7 @@
     "typescript": "^5.1.6"
   },
   "jest": {
+    "clearMocks": true,
     "transform": {
       "^.+\\.(t)s$": "ts-jest"
     },

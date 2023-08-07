@@ -1,3 +1,5 @@
+import { CreateDepartmentDto } from "../dto/create-department.dto";
+import { UpdateDepartmentDto } from "../dto/update-department.dto";
 import { Department } from "../entity/department-entity";
 import { HttpException } from "../exception/http.exception";
 import { DepartmentRepository } from "../repository/department.repository";
@@ -29,17 +31,17 @@ export class DepartmentService {
     return department;
   }
 
-  async createDepartment(name: string): Promise<Department> {
+  async createDepartment(departmentDto: CreateDepartmentDto): Promise<Department> {
     const newDepartment = new Department();
-    newDepartment.name = name;
+    newDepartment.name = departmentDto.name;
     newDepartment.employees = [];
     return this.departmentRepository.addNewDepartment(newDepartment);
   }
 
-  async updateDepartment(id: number, name: string): Promise<Department> {
+  async updateDepartment(departmentDto: UpdateDepartmentDto): Promise<Department> {
     try {
-      const department = await this.getDepartmentById(id);
-      department.name = name;
+      const department = await this.getDepartmentById(departmentDto.id);
+      department.name = departmentDto.name;
       return this.departmentRepository.modifyDepartmentById(department);
     } catch (error) {
       throw error;

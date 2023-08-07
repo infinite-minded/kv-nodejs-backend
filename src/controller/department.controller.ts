@@ -92,7 +92,7 @@ class DepartmentController {
         throw new ValidateException(400, "Validation Errors", errors);
       }
       const newDepartment = await this.departmentService.createDepartment(
-        createDepartmentDto.name
+        createDepartmentDto
       );
       res
         .status(201)
@@ -122,8 +122,7 @@ class DepartmentController {
       }
 
       const updatedDepartment = await this.departmentService.updateDepartment(
-        updateDepartmentDto.id,
-        updateDepartmentDto.name
+        updateDepartmentDto
       );
       res
         .status(200)

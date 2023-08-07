@@ -8,6 +8,8 @@ import { Role } from "../utils/role.enum";
 import { jwtPayload } from "../utils/jwtPayload.type";
 import { Department } from "../entity/department-entity";
 import { DepartmentService } from "../service/department.service";
+import { CreateEmployeeDto } from "../dto/create-employee.dto";
+import { UpdateEmployeeDto } from "../dto/update-employee.dto";
 
 class EmployeeService {
   constructor(private employeeRepository: EmployeeRepository, private departmentService: DepartmentService) {}
@@ -45,27 +47,22 @@ class EmployeeService {
   }
 
   async createEmployee(
-    name: string,
-    email: string,
-    address: Address,
-    password: string,
-    role: Role,
-    department: Department
+    employeeDto: CreateEmployeeDto
   ): Promise<Employee> {
     const newEmployee = new Employee();
-    newEmployee.name = name;
-    newEmployee.email = email;
+    newEmployee.name = employeeDto.name;
+    newEmployee.email = employeeDto.email;
 
     const newAddress = new Address();
-    newAddress.line1 = address.line1;
-    newAddress.pincode = address.pincode;
+    newAddress.line1 = employeeDto.address.line1;
+    newAddress.pincode = employeeDto.address.pincode;
 
     newEmployee.address = newAddress; //OR newAddress.employee = newEmployee; - will this work & what other changes needed?
 
-    newEmployee.password = await bcrypt.hash(password, 9);
-    newEmployee.role = role;
+    newEmployee.password = await bcrypt.hash(employeeDto.password, 9);
+    newEmployee.role = employeeDto.role;
 
-    const assignedDepartment = await this.departmentService.getDepartmentByName(department.name)
+    const assignedDepartment = await this.departmentService.getDepartmentByName(employeeDto.department.name)
 
     newEmployee.department = assignedDepartment;
 
@@ -73,23 +70,17 @@ class EmployeeService {
   }
 
   async updateEmployee(
-    id: number,
-    name: string,
-    email: string,
-    address: Address,
-    password: string,
-    role: Role,
-    department: Department
+    employeeDto: UpdateEmployeeDto
   ): Promise<Employee | null> {
     try {
-      const employee = await this.getEmployeeById(id); //any invalid ID request exception will be thrown in getEmployeeById() itself
-      employee.name = name;
-      employee.email = email;
-      employee.address.line1 = address.line1;
-      employee.address.pincode = address.pincode;
-      employee.password = await bcrypt.hash(password, 9);
-      employee.role = role;
-      const newDepartment = await this.departmentService.getDepartmentByName(department.name)
+      const employee = await this.getEmployeeById(employeeDto.id); //any invalid ID request exception will be thrown in getEmployeeById() itself
+      employee.name = employeeDto.name;
+      employee.email = employeeDto.email;
+      employee.address.line1 = employeeDto.address.line1;
+      employee.address.pincode = employeeDto.address.pincode;
+      employee.password = await bcrypt.hash(employeeDto.password, 9);
+      employee.role = employeeDto.role;
+      const newDepartment = await this.departmentService.getDepartmentByName(employeeDto.department.name)
       employee.department = newDepartment;
       return this.employeeRepository.modifyEmployeeById(employee);
     } catch (error) {

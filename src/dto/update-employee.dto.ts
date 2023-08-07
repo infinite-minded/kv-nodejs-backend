@@ -30,7 +30,7 @@ export class UpdateEmployeeDto {
   @IsObject()
   @ValidateNested({ each: true }) //to validate inner keys of address object
   @Type(() => CreateAddressDto)
-  address: Address;
+  address: CreateAddressDto;
 
   @IsNotEmpty()
   @IsString()
@@ -44,5 +44,5 @@ export class UpdateEmployeeDto {
   @IsObject()
   @ValidateNested({ each: true }) //to validate inner keys of address object
   @Type(() => CreateDepartmentDto)
-  department: Department;
+  department: CreateDepartmentDto;
 }

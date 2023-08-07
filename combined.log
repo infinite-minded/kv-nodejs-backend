@@ -16,3 +16,15 @@
   service: 'user-service',
   timestamp: '2023-08-07T06:34:56.028Z'
 }
+{
+  level: 'error',
+  message: 'Employee with ID 3 not found!',
+  service: 'user-service',
+  timestamp: '2023-08-07T06:54:14.857Z'
+}
+{
+  level: 'info',
+  message: 'Employee with ID 2 fetched',
+  service: 'user-service',
+  timestamp: '2023-08-07T06:54:19.114Z'
+}

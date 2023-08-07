@@ -108,12 +108,7 @@ class EmployeeController {
         throw new ValidateException(400, "Validation Errors", errors);
       }
       const newEmployee = await this.employeeService.createEmployee(
-        createEmployeeDto.name, //pass validated DTO attribs here instead of name, email, etc
-        createEmployeeDto.email,
-        createEmployeeDto.address,
-        createEmployeeDto.password,
-        createEmployeeDto.role,
-        createEmployeeDto.department
+        createEmployeeDto
       );
       res
         .status(201)
@@ -145,13 +140,7 @@ class EmployeeController {
       const employeeAddress = req.body.address;
       */
       const modifiedEmployee = await this.employeeService.updateEmployee(
-        modifyEmployeeDto.id,
-        modifyEmployeeDto.name,
-        modifyEmployeeDto.email,
-        modifyEmployeeDto.address,
-        modifyEmployeeDto.password,
-        modifyEmployeeDto.role,
-        modifyEmployeeDto.department
+        modifyEmployeeDto
       );
       res
         .status(200)
