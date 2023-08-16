@@ -1,7 +1,6 @@
 import express, { NextFunction } from "express";
 import { DepartmentService } from "../service/department.service";
 import { plainToInstance } from "class-transformer";
-import { CreateDepartmentDto } from "../dto/create-department.dto";
 import { validate } from "class-validator";
 import { ValidateException } from "../exception/validate.exception";
 import { authenticate } from "../middleware/authenticate.middleware";
@@ -9,8 +8,10 @@ import { authorize } from "../middleware/authorize.middleware";
 import { RequestWithUser } from "../utils/requestWithUser";
 import { FormatResponse } from "../utils/formatResponse";
 import { Role } from "../utils/role.enum";
-import { UpdateDepartmentDto } from "../dto/update-department.dto";
+import { CreateDepartmentDto} from "../dto/create-department.dto";
 import { logger } from "../middleware/winston.middleware";
+import { DepartmentDto } from "../dto/department.dto";
+import { UpdateDepartmentDto } from "../dto/update-department-dto";
 
 class DepartmentController {
   public router: express.Router;

@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty } from "class-validator";
+import { IsNumber, IsString, IsNotEmpty } from "class-validator";
 
 export class CreateDepartmentDto {
   @IsNotEmpty()

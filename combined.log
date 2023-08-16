@@ -28,3 +28,227 @@
   service: 'user-service',
   timestamp: '2023-08-07T06:54:19.114Z'
 }
+{
+  level: 'info',
+  message: 'Employee with email admin@gmail.com logged in',
+  service: 'user-service',
+  timestamp: '2023-08-07T11:56:39.185Z'
+}
+{
+  level: 'error',
+  message: 'jwt must be provided',
+  service: 'user-service',
+  timestamp: '2023-08-07T11:57:42.832Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all roles',
+  service: 'user-service',
+  timestamp: '2023-08-07T11:57:49.486Z'
+}
+{
+  level: 'info',
+  message: 'New department created',
+  service: 'user-service',
+  timestamp: '2023-08-07T12:18:46.661Z'
+}
+{
+  service: 'user-service',
+  name: [ 'name must be a string', 'name should not be empty' ],
+  level: 'error',
+  message: 'Validation Errors',
+  timestamp: '2023-08-07T12:19:08.803Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all departments',
+  service: 'user-service',
+  timestamp: '2023-08-07T12:19:16.266Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all departments',
+  service: 'user-service',
+  timestamp: '2023-08-07T12:20:24.235Z'
+}
+{
+  level: 'info',
+  message: 'New employee created',
+  service: 'user-service',
+  timestamp: '2023-08-07T12:20:38.983Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all employees',
+  service: 'user-service',
+  timestamp: '2023-08-07T12:21:18.646Z'
+}
+{
+  level: 'info',
+  message: 'Department with ID 3 removed',
+  service: 'user-service',
+  timestamp: '2023-08-07T12:21:57.654Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all employees',
+  service: 'user-service',
+  timestamp: '2023-08-07T12:22:02.656Z'
+}
+{
+  level: 'error',
+  message: 'Department with ID 3 not found!',
+  service: 'user-service',
+  timestamp: '2023-08-07T12:25:45.151Z'
+}
+{
+  level: 'info',
+  message: 'Employee with email admin@gmail.com logged in',
+  service: 'user-service',
+  timestamp: '2023-08-16T09:42:19.383Z'
+}
+{
+  level: 'info',
+  message: 'Employee with email admin@gmail.com logged in',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:14:47.013Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all departments',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:16:50.769Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all employees',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:17:08.316Z'
+}
+{
+  service: 'user-service',
+  department: [ { name: [ 'name must be a string', 'name should not be empty' ] } ],
+  level: 'error',
+  message: 'Validation Errors',
+  timestamp: '2023-08-16T11:17:57.451Z'
+}
+{
+  level: 'info',
+  message: 'New employee created',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:32:24.839Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all employees',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:33:31.291Z'
+}
+{
+  level: 'info',
+  message: 'Employee with ID 4 fetched',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:33:40.345Z'
+}
+{
+  level: 'error',
+  message: 'jwt must be provided',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:34:04.071Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all employees',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:34:14.128Z'
+}
+{
+  service: 'user-service',
+  department: [ { name: [ 'name must be a string', 'name should not be empty' ] } ],
+  level: 'error',
+  message: 'Validation Errors',
+  timestamp: '2023-08-16T11:35:06.600Z'
+}
+{
+  level: 'info',
+  message: 'Employee with ID 4 updated',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:36:00.058Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all employees',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:36:10.244Z'
+}
+{
+  level: 'info',
+  message: 'Employee with ID 4 removed',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:37:20.966Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all employees',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:37:24.220Z'
+}
+{
+  level: 'error',
+  message: 'Unexpected token n in JSON at position 6',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:37:50.687Z'
+}
+{
+  service: 'user-service',
+  id: [
+    'id must be a number conforming to the specified constraints',
+    'id should not be empty'
+  ],
+  level: 'error',
+  message: 'Validation Errors',
+  timestamp: '2023-08-16T11:38:04.124Z'
+}
+{
+  service: 'user-service',
+  id: [ 'id must be a number conforming to the specified constraints' ],
+  level: 'error',
+  message: 'Validation Errors',
+  timestamp: '2023-08-16T11:39:06.965Z'
+}
+{
+  level: 'info',
+  message: 'New department created',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:45:34.692Z'
+}
+{
+  level: 'info',
+  message: 'Department with ID 4 fetched',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:46:04.150Z'
+}
+{
+  level: 'info',
+  message: 'Department with ID 4 updated',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:46:29.766Z'
+}
+{
+  level: 'info',
+  message: 'Department with ID 4 removed',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:46:50.290Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all departments',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:46:55.306Z'
+}
+{
+  level: 'info',
+  message: 'Fetched all roles',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:47:14.501Z'
+}

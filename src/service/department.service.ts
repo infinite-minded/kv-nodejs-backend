@@ -1,8 +1,8 @@
 import { CreateDepartmentDto } from "../dto/create-department.dto";
-import { UpdateDepartmentDto } from "../dto/update-department.dto";
 import { Department } from "../entity/department-entity";
 import { HttpException } from "../exception/http.exception";
 import { DepartmentRepository } from "../repository/department.repository";
+import { UpdateDepartmentDto } from "../dto/update-department-dto";
 
 export class DepartmentService {
   constructor(private departmentRepository: DepartmentRepository) {}

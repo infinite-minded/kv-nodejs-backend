@@ -5,13 +5,13 @@ import {
   ValidateNested,
   IsObject,
   IsEnum,
+  IsBoolean,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Address } from "../entity/address.entity";
 import { CreateAddressDto } from "./create-address.dto";
 import { Role } from "../utils/role.enum";
-import { CreateDepartmentDto } from "./create-department.dto";
-import { Department } from "../entity/department-entity";
+import { DepartmentDto } from "./department.dto";
 
 export class CreateEmployeeDto {
   @IsNotEmpty()
@@ -21,6 +21,10 @@ export class CreateEmployeeDto {
   @IsNotEmpty()
   @IsEmail()
   email: string;
+
+  @IsNotEmpty()
+  @IsBoolean()
+  status: boolean;
 
   @IsNotEmpty()
   @IsObject()
@@ -39,6 +43,6 @@ export class CreateEmployeeDto {
   @IsNotEmpty()
   @IsObject()
   @ValidateNested({ each: true }) //to validate inner keys of address object
-  @Type(() => CreateDepartmentDto)
-  department: CreateDepartmentDto;
+  @Type(() => DepartmentDto)
+  department: DepartmentDto;
 }

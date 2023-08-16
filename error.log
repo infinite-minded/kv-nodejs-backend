@@ -10,3 +10,65 @@
   service: 'user-service',
   timestamp: '2023-08-07T06:54:14.857Z'
 }
+{
+  level: 'error',
+  message: 'jwt must be provided',
+  service: 'user-service',
+  timestamp: '2023-08-07T11:57:42.832Z'
+}
+{
+  service: 'user-service',
+  name: [ 'name must be a string', 'name should not be empty' ],
+  level: 'error',
+  message: 'Validation Errors',
+  timestamp: '2023-08-07T12:19:08.803Z'
+}
+{
+  level: 'error',
+  message: 'Department with ID 3 not found!',
+  service: 'user-service',
+  timestamp: '2023-08-07T12:25:45.151Z'
+}
+{
+  service: 'user-service',
+  department: [ { name: [ 'name must be a string', 'name should not be empty' ] } ],
+  level: 'error',
+  message: 'Validation Errors',
+  timestamp: '2023-08-16T11:17:57.451Z'
+}
+{
+  level: 'error',
+  message: 'jwt must be provided',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:34:04.071Z'
+}
+{
+  service: 'user-service',
+  department: [ { name: [ 'name must be a string', 'name should not be empty' ] } ],
+  level: 'error',
+  message: 'Validation Errors',
+  timestamp: '2023-08-16T11:35:06.600Z'
+}
+{
+  level: 'error',
+  message: 'Unexpected token n in JSON at position 6',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:37:50.687Z'
+}
+{
+  service: 'user-service',
+  id: [
+    'id must be a number conforming to the specified constraints',
+    'id should not be empty'
+  ],
+  level: 'error',
+  message: 'Validation Errors',
+  timestamp: '2023-08-16T11:38:04.124Z'
+}
+{
+  service: 'user-service',
+  id: [ 'id must be a number conforming to the specified constraints' ],
+  level: 'error',
+  message: 'Validation Errors',
+  timestamp: '2023-08-16T11:39:06.965Z'
+}

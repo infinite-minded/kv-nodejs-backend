@@ -52,9 +52,11 @@ class EmployeeService {
     const newEmployee = new Employee();
     newEmployee.name = employeeDto.name;
     newEmployee.email = employeeDto.email;
+    newEmployee.status = employeeDto.status;
 
     const newAddress = new Address();
     newAddress.line1 = employeeDto.address.line1;
+    newAddress.line2 = employeeDto.address.line2;
     newAddress.pincode = employeeDto.address.pincode;
 
     newEmployee.address = newAddress; //OR newAddress.employee = newEmployee; - will this work & what other changes needed?
@@ -62,7 +64,7 @@ class EmployeeService {
     newEmployee.password = await bcrypt.hash(employeeDto.password, 9);
     newEmployee.role = employeeDto.role;
 
-    const assignedDepartment = await this.departmentService.getDepartmentByName(employeeDto.department.name)
+    const assignedDepartment = await this.departmentService.getDepartmentById(employeeDto.department.id);
 
     newEmployee.department = assignedDepartment;
 
@@ -76,11 +78,13 @@ class EmployeeService {
       const employee = await this.getEmployeeById(employeeDto.id); //any invalid ID request exception will be thrown in getEmployeeById() itself
       employee.name = employeeDto.name;
       employee.email = employeeDto.email;
+      employee.status = employeeDto.status;
       employee.address.line1 = employeeDto.address.line1;
+      employee.address.line2 = employeeDto.address.line2;
       employee.address.pincode = employeeDto.address.pincode;
       employee.password = await bcrypt.hash(employeeDto.password, 9);
       employee.role = employeeDto.role;
-      const newDepartment = await this.departmentService.getDepartmentByName(employeeDto.department.name)
+      const newDepartment = await this.departmentService.getDepartmentById(employeeDto.department.id)
       employee.department = newDepartment;
       return this.employeeRepository.modifyEmployeeById(employee);
     } catch (error) {

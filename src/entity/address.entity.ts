@@ -7,6 +7,9 @@ export class Address extends AbstractEntity {
   @Column()
   line1: string;
 
+  @Column({ default: "ABC" })
+  line2: string;
+
   @Column()
   pincode: string;
 

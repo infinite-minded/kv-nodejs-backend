@@ -19,6 +19,9 @@ class Employee extends AbstractEntity {
   @Column()
   password: string;
 
+  @Column({ default: true })
+  status: boolean;
+
   @Column({ default: Role.DEVELOPER })
   role: Role;
 
