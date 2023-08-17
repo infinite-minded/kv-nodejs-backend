@@ -72,3 +72,349 @@
   message: 'Validation Errors',
   timestamp: '2023-08-16T11:39:06.965Z'
 }
+{
+  level: 'error',
+  message: 'Department with ID 4 not found!',
+  service: 'user-service',
+  timestamp: '2023-08-16T11:51:24.722Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-16T17:55:32.819Z'
+}
+{
+  level: 'error',
+  message: 'Employee with ID 3 not found!',
+  service: 'user-service',
+  timestamp: '2023-08-17T05:10:55.436Z'
+}
+{
+  level: 'error',
+  message: 'Employee with ID 22 not found!',
+  service: 'user-service',
+  timestamp: '2023-08-17T06:25:35.710Z'
+}
+{
+  level: 'error',
+  message: 'Employee with ID 22 not found!',
+  service: 'user-service',
+  timestamp: '2023-08-17T06:25:37.542Z'
+}
+{
+  service: 'user-service',
+  role: [
+    'role must be one of the following values: UI, Developer, HR, Admin',
+    'role should not be empty'
+  ],
+  level: 'error',
+  message: 'Validation Errors',
+  timestamp: '2023-08-17T09:45:26.698Z'
+}
+{
+  level: 'error',
+  message: 'Department with ID 0 not found!',
+  service: 'user-service',
+  timestamp: '2023-08-17T09:47:27.546Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:24.728Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:25.576Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:25.746Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:25.923Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:26.105Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:26.286Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:26.436Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:26.605Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:26.768Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:40.093Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:40.227Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:40.413Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:40.567Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:40.719Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:51:40.898Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:14.410Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:14.476Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:14.654Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:14.816Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:15.161Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:15.340Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:15.518Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:15.698Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:15.856Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:16.054Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:16.238Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:16.430Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:16.627Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:16.852Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:17.008Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:17.204Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:17.395Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:17.639Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:17.800Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:18.000Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:55.400Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:56.010Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:56.362Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:56.635Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:56.794Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:56.996Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:52:57.156Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:53:11.324Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:53:11.375Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:53:11.572Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:53:11.719Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:53:11.890Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:53:12.034Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:53:12.196Z'
+}
+{
+  level: 'error',
+  message: 'jwt expired',
+  service: 'user-service',
+  timestamp: '2023-08-17T10:53:12.355Z'
+}

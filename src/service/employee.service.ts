@@ -14,7 +14,7 @@ import { UpdateEmployeeDto } from "../dto/update-employee.dto";
 class EmployeeService {
   constructor(private employeeRepository: EmployeeRepository, private departmentService: DepartmentService) {}
 
-  async fetchAllEmployees(nameFilter: string): Promise<Employee[]> {
+  async fetchAllEmployees(nameFilter: string, skip: number, take: number): Promise<Employee[]> {
     //add additional business logic here if needed
     let filter: string;
     if (nameFilter) {
@@ -22,7 +22,7 @@ class EmployeeService {
     } else {
       filter = "%";
     }
-    const employees = await this.employeeRepository.findAllEmployees(filter);
+    const employees = await this.employeeRepository.findAllEmployees(filter, skip, take);
     if (!employees) {
       throw new HttpException(404, `No employees added yet!`);
     }

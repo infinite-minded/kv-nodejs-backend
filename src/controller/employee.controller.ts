@@ -61,8 +61,12 @@ class EmployeeController {
   ) => {
     try {
       const nameFilter = req.query.name;
+      const skip = Number(req.query.skip) | 0;
+      const take = Number(req.query.take) | 15;
       const employees = await this.employeeService.fetchAllEmployees(
-        nameFilter as string
+        nameFilter as string,
+        skip,
+        take
       );
       res
         .status(200)

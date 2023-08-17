@@ -10,9 +10,11 @@ import departmentRoute from "./route/department.route";
 import roleRoute from "./route/role.route";
 import { errorMiddleware } from "./middleware/error.middleware";
 import { RequestWithUser } from "./utils/requestWithUser";
+import cors from "cors";
 
 const server = express();
 server.use(bodyparser.json());
+server.use(cors());
 server.use(loggerMiddleware);
 server.use(
   (request: RequestWithUser, response: Response, next: NextFunction) => {

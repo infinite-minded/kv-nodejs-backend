@@ -6,8 +6,10 @@ class EmployeeRepository {
 
   constructor(private employeeRepository: Repository<Employee>) {}
 
-  findAllEmployees(filter: string): Promise<Employee[]> {
+  findAllEmployees(filter: string, skip: number, take: number): Promise<Employee[]> {
     return this.employeeRepository.find({
+      skip: skip,
+      take: take,
       where: {
         name: Like(filter),
       },
